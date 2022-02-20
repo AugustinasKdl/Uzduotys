@@ -10,6 +10,8 @@ using std::cin;
 using std::string;
 using std::vector;
 using std::sort;
+using std::endl;
+using std::setw;
 
 struct data {
     string vardas="", pavarde="";
@@ -49,8 +51,8 @@ int main()
         sarasas.push_back(laik);
     }
 
-    cout << "Vardas" << std::setw(21) << "Pavarde" << std::setw(41) << "Galutinis(Vid.) / Galutinis(Med.)" << std::endl;
-    cout << "------------------------------------------------------------------" << std::endl;
+    cout << "Vardas" << setw(21) << "Pavarde" << (41) << "Galutinis(Vid.) / Galutinis(Med.)" << endl;
+    cout << "------------------------------------------------------------------" << endl;
     for(const auto &el : sarasas)
     {
         isved(el, a);
@@ -82,7 +84,7 @@ void isved(const data& temp, int a)
 {
     int sum = 0;
     double atsM;
-    cout << temp.vardas << std::setw(19) << temp.pavarde;
+    cout << temp.vardas << setw(19) << temp.pavarde;
     for(int i = 0; i < a; i++)
     {
         sum = sum + temp.paz[i];
@@ -96,8 +98,8 @@ void isved(const data& temp, int a)
     atsM = (temp.paz[a/2-1] + temp.paz[a/2]) / 2.0;
     else
     atsM = temp.paz[a/2];
-    cout << std::setw(15) << atsV;
-    cout << std::setw(15) << atsM << std::endl;
+    cout << setw(15) << atsV;
+    cout << setw(15) << atsM << endl;
 }
 int failcheck()
 {
@@ -106,7 +108,7 @@ int failcheck()
         {
             cin.clear();
             cin.ignore();
-            cout << "Error! Neivedete skaiciaus. " << std::endl;
+            cout << "Error! Neivedete skaiciaus. " << endl;
             cout << "Iveskite skaiciu is naujo: ";
             cin >> x;
         }
@@ -119,7 +121,7 @@ int amountcheck()
         {
             cin.clear();
             cin.ignore();
-            cout << "Error! Skaicus yra per didelis arba per mazas." << std::endl;
+            cout << "Error! Skaicus yra per didelis arba per mazas." << endl;
             cout << "Iveskite skaiciu is naujo: ";
             cin >> x;
             if(cin.fail()){
