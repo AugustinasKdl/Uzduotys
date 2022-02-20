@@ -18,7 +18,7 @@ struct data {
 };
 
 void isvestis(data& temp, int a);
-void isved(const data& temp);
+void isved(const data& temp, int a);
 
 int main()
 {
@@ -37,7 +37,7 @@ int main()
 
     for(const auto &el : sarasas)
     {
-        isved(el);
+        isved(el, a);
     }
 }
 
@@ -49,16 +49,24 @@ void isvestis(data& temp, int a)
     {
         cout<<"Isveskite " << i + 1 << "-a(-i) pazymi:";
         cin >> temp.paz[i];
+        while (temp.paz[i] > 10 || temp.paz[i] <= 0)
+        {
+            cout << "Error! Skaicus turetu buti tarp (1 ir 10)." << std::endl;
+            cout << "iveskite skaiciu is naujo: ";
+            cin >> temp.paz[i];
+        }
     }
     cout << "Veskite egzamino iverti: "; cin >> temp.egz;
 }
 
-void isved(const data& temp)
+void isved(const data& temp, int a)
 {
-    cout << std::setw(20) << temp.vardas << std::setw(20) << temp.pavarde;
-    for(int i = 0; i < 3; i++)
+    int sum = 0;
+    cout << temp.vardas << std::setw(20) << temp.pavarde;
+    for(int i = 0; i < a; i++)
     {
-        cout << std::setw(10) << temp.paz[i];
+        sum = sum + temp.paz[i];
     }
-    cout << std::setw(10) << temp.egz << std::endl;
+    double atsV = sum/a*0.4+temp.egz*0.6;
+    cout << std::setw(10) << atsV << std::endl;
 }
