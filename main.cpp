@@ -35,6 +35,8 @@ int main()
         sarasas.push_back(laik);
     }
 
+    cout << "Vardas" << std::setw(21) << "Pavarde" << std::setw(21) << "Galutinis(Vid.)" << std::endl;
+    cout << "---------------------------------------------------" << std::endl;
     for(const auto &el : sarasas)
     {
         isved(el, a);
