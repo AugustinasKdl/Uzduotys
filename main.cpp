@@ -4,6 +4,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <random>
 
 using std::cout;
 using std::cin;
@@ -15,11 +16,11 @@ using std::setw;
 
 struct data {
     string vardas="", pavarde="";
-    string paz, egz=0;
+    vector<int> paz, egz;
     double rezult=0;
 };
 
-void isvestis(data& temp, int a);
+void isvestis(data& temp, int a, string b);
 void isved(const data& temp, int a);
 int failcheck();
 int amountcheck();
@@ -27,14 +28,14 @@ int amountcheck();
 int main()
 {
     vector<data> sarasas;
-    int a= 1;
     data laik;
     int n, a;
-    string tkr;
+    string tkr, tkr2;
     bool run = true;
+    bool run2 = true;
     while(run)
     {
-        cout << "Ar zinote studentu skaiciu?(t/n)"; cin >> tkr;
+        cout << "Ar zinote studentu skaiciu? (t/n)"; cin >> tkr;
         if(tkr == "t" || tkr == "T")
         {
             cout << "Kiek studentu vesite (daugiau nei 0)?"; cin >> n;
@@ -45,23 +46,33 @@ int main()
                 n = amountcheck(); 
             }
             sarasas.reserve(n);
-            
-            for(int i = 0; i<n; i++)
+            while(run2)
             {
-                cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> a;
-                if(cin.fail()){
-                    a = failcheck(); 
-                    }
-                if(a > 250 || a <= 0){
-                    a = amountcheck(); 
+                cout << "Ar norite generuoti pazymius? (t/n)"; cin >> tkr2;
+                if(tkr2 == "t" || tkr2 == "T" || tkr2 == "n" || tkr2 == "N")
+                {
+                    for(int i = 0; i<n; i++)
+                    {
+                        cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> a;
+                        if(cin.fail()){
+                            a = failcheck(); 
+                            }
+                        laik.paz.reserve(a);
+                        laik.egz.reserve(1);
+                        isvestis(laik, a, tkr2);
+                        sort(&laik.paz[0], &laik.paz[0]+a);
+                        sarasas.push_back(laik);
+                        
+                    } 
+                    run2 = false;
                 }
-                isvestis(laik,a);
-                sort(&laik.paz[0], &laik.paz[0]+a);
-                sarasas.push_back(laik);
-                
-            } 
+                else
+                {
+                    cout << "Error! Ivedimas netinkamas. Prašome pakartoti." << endl;
+                }
+            }
             run = false;
-        }
+        } 
         else if(tkr == "n" || tkr == "N")
         {
             run = false;
@@ -70,8 +81,6 @@ int main()
         {
             cout << "Error! Ivedimas netinkamas. Prašome pakartoti." << endl;
         }
-        cout << tkr;
-
     }
     cout << "Vardas" << setw(21) << "Pavarde" << setw(41) << "Galutinis(Vid.) / Galutinis(Med.)" << endl;
     cout << "------------------------------------------------------------------" << endl;
@@ -81,25 +90,41 @@ int main()
     }
 }
 
-void isvestis(data& temp, int a)
+void isvestis(data& temp, int a, string b)
 {
-    cout <<"Veskite varda: "; cin >> temp.vardas;
-    cout <<"Veskite pavarde: "; cin >> temp.pavarde;
-    for(int i = 0; i < a; i++)
+    if(b == "t" || b == "T")
     {
-        cout<<"Isveskite " << i + 1 << "-a(-i) pazymi (nuo 1 iki 10): ";
-        cin >> temp.paz[i];
-        if(cin.fail()){
-           temp.paz[i] = failcheck(); 
+        std::random_device rd;
+        std::mt19937 mt(rd());
+        std::uniform_int_distribution<int> dist (1,10);
+        cout <<"Veskite varda: "; cin >> temp.vardas;
+        cout <<"Veskite pavarde: "; cin >> temp.pavarde;
+        for(int i = 0; i < a; i++)
+        {
+            temp.paz[i] = dist(mt);
+            cout << temp.paz[i] << " ";
         }
-        if(temp.paz[i] > 10 || temp.paz[i] <= 0){
-           temp.paz[i] = amountcheck(); 
+        temp.egz[0] = dist(mt);
+    }
+    else
+    {
+        cout <<"Veskite varda: "; cin >> temp.vardas;
+        cout <<"Veskite pavarde: "; cin >> temp.pavarde;
+        for(int i = 0; i < a; i++)
+        {
+            cout<<"Isveskite " << i + 1 << "-a(-i) pazymi (nuo 1 iki 10): ";
+            cin >> temp.paz[i];
+            if(cin.fail()){
+                temp.paz[i] = failcheck(); 
+            }
+            if(temp.paz[i] > 10 || temp.paz[i] <= 0){
+                temp.paz[i] = amountcheck(); 
+            }
+        cout << "Veskite egzamino iverti (nuo 1 iki 10): "; cin >> temp.egz[0];
+        if(cin.fail()) temp.egz[0] = failcheck();
+        if(temp.egz[0] > 10 || temp.egz[0] <= 0) temp.egz[0] = amountcheck();
         }
     }
-    cout << "Veskite egzamino iverti (nuo 1 iki 10): "; cin >> temp.egz;
-    if(cin.fail()) temp.egz = failcheck();
-    if(temp.egz > 10 || temp.egz <= 0) temp.egz = amountcheck();
-    
 }
 
 void isved(const data& temp, int a)
@@ -107,21 +132,23 @@ void isved(const data& temp, int a)
     int sum = 0;
     double atsM;
     cout << temp.vardas << setw(19) << temp.pavarde;
+    cout << temp.egz[0] << endl;
+    cout << temp.paz[0] << endl;
     for(int i = 0; i < a; i++)
     {
         sum = sum + temp.paz[i];
     }
-    // for(int i = 0; i < a; i++)
-    // {
-    //     cout << std::setw(15) << temp.paz[i];
-    // }
-    double atsV = sum / a * 0.4 + temp.egz * 0.6;
-    if ( a % 2 == 0)
-    atsM = (temp.paz[a/2-1] + temp.paz[a/2]) / 2.0 * 0.4 + temp.egz * 0.6;
-    else
-    atsM = temp.paz[a/2] * 0.4 + temp.egz * 0.6;
-    cout << setw(15) << atsV;
-    cout << setw(15) << atsM << endl;
+    for(int i = 0; i < a; i++)
+    {
+        cout << std::setw(15) << temp.paz[i];
+    }
+    // double atsV = sum / a * 0.4 + temp.egz[0] * 0.6;
+    // if ( a % 2 == 0)
+    // atsM = (temp.paz[a/2-1] + temp.paz[a/2]) / 2.0 * 0.4 + temp.egz[0] * 0.6;
+    // else
+    // atsM = temp.paz[a/2] * 0.4 + temp.egz[0] * 0.6;
+    // cout << setw(15) << atsV;
+    // cout << setw(15) << atsM << endl;
 }
 
 int failcheck()
