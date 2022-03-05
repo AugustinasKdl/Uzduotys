@@ -15,7 +15,7 @@ using std::setw;
 
 struct data {
     string vardas="", pavarde="";
-    int paz[250] = {0}, egz=0;
+    string paz, egz=0;
     double rezult=0;
 };
 
@@ -27,31 +27,53 @@ int amountcheck();
 int main()
 {
     vector<data> sarasas;
+    int a= 1;
     data laik;
     int n, a;
-    cout << "Kiek studentu vesite (daugiau nei 0)?"; cin >> n;
-    if(cin.fail()){
-           n = failcheck(); 
-        }
-    if(n <= 0){
-        n = amountcheck(); 
-    }
-    sarasas.reserve(n);
-    for(int i = 0; i<n; i++)
+    string tkr;
+    bool run = true;
+    while(run)
     {
-        cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> a;
-        if(cin.fail()){
-            a = failcheck(); 
+        cout << "Ar zinote studentu skaiciu?(t/n)"; cin >> tkr;
+        if(tkr == "t" || tkr == "T")
+        {
+            cout << "Kiek studentu vesite (daugiau nei 0)?"; cin >> n;
+            if(cin.fail()){
+                n = failcheck(); 
+                }
+            if(n <= 0){
+                n = amountcheck(); 
             }
-        if(a > 250 || a <= 0){
-            a = amountcheck(); 
+            sarasas.reserve(n);
+            
+            for(int i = 0; i<n; i++)
+            {
+                cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> a;
+                if(cin.fail()){
+                    a = failcheck(); 
+                    }
+                if(a > 250 || a <= 0){
+                    a = amountcheck(); 
+                }
+                isvestis(laik,a);
+                sort(&laik.paz[0], &laik.paz[0]+a);
+                sarasas.push_back(laik);
+                
+            } 
+            run = false;
         }
-        isvestis(laik,a);
-        sort(&laik.paz[0], &laik.paz[0]+a);
-        sarasas.push_back(laik);
-    }
+        else if(tkr == "n" || tkr == "N")
+        {
+            run = false;
+        }
+        else
+        {
+            cout << "Error! Ivedimas netinkamas. Prašome pakartoti." << endl;
+        }
+        cout << tkr;
 
-    cout << "Vardas" << setw(21) << "Pavarde" << (41) << "Galutinis(Vid.) / Galutinis(Med.)" << endl;
+    }
+    cout << "Vardas" << setw(21) << "Pavarde" << setw(41) << "Galutinis(Vid.) / Galutinis(Med.)" << endl;
     cout << "------------------------------------------------------------------" << endl;
     for(const auto &el : sarasas)
     {
@@ -93,14 +115,15 @@ void isved(const data& temp, int a)
     // {
     //     cout << std::setw(15) << temp.paz[i];
     // }
-    double atsV = sum/a*0.4+temp.egz*0.6;
+    double atsV = sum / a * 0.4 + temp.egz * 0.6;
     if ( a % 2 == 0)
-    atsM = (temp.paz[a/2-1] + temp.paz[a/2]) / 2.0;
+    atsM = (temp.paz[a/2-1] + temp.paz[a/2]) / 2.0 * 0.4 + temp.egz * 0.6;
     else
-    atsM = temp.paz[a/2];
+    atsM = temp.paz[a/2] * 0.4 + temp.egz * 0.6;
     cout << setw(15) << atsV;
     cout << setw(15) << atsM << endl;
 }
+
 int failcheck()
 {
     int x;
@@ -114,6 +137,7 @@ int failcheck()
         }
     return x;
 }
+
 int amountcheck()
 {
     int x;
