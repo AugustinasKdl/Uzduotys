@@ -89,7 +89,7 @@ int main()
                         }
                         else if(tkr3 == "t" || tkr3 == "T")
                         {
-                            cout << "Kiek namu darbu pazymiu vesite?"; cin >> a;
+                            cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> a;
                             if(cin.fail()){
                                 a = failcheck(); 
                                 }
