@@ -25,6 +25,7 @@ void isvestis(data& temp, string b);
 void isved(const data& temp);
 int failcheck();
 int amountcheck();
+int amountcheck2();
 
 int main()
 {
@@ -44,7 +45,7 @@ int main()
                 n = failcheck(); 
                 }
             if(n <= 0){
-                n = amountcheck(); 
+                n = amountcheck2(); 
             }
             sarasas.reserve(n);
             while(run2)
@@ -55,9 +56,12 @@ int main()
                     for(int i = 0; i<n; i++)
                     {
                         laik_tust = laik;
-                        cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> laik_tust.paz_sk;
+                        cout << "Kiek namu darbu pazymiu vesite (daugiau nei 0)?"; cin >> laik_tust.paz_sk;
                         if(cin.fail()){
                             laik_tust.paz_sk = failcheck(); 
+                        }
+                        if(laik_tust.paz_sk <= 0){
+                            laik_tust.paz_sk = amountcheck2(); 
                         }
                         isvestis(laik_tust, tkr2);
                         sort(&laik_tust.paz[0], &laik_tust.paz[0]+laik_tust.paz_sk);
@@ -90,9 +94,12 @@ int main()
                         }
                         else if(tkr3 == "t" || tkr3 == "T")
                         {
-                            cout << "Kiek namu darbu pazymiu vesite ?"; cin >> laik_tust.paz_sk;
+                            cout << "Kiek namu darbu pazymiu vesite (daugiau nei 0)?"; cin >> laik_tust.paz_sk;
                             if(cin.fail()){
                                 laik_tust.paz_sk = failcheck(); 
+                            }
+                            if(laik_tust.paz_sk <= 0){
+                                laik_tust.paz_sk = amountcheck2(); 
                             }
                             isvestis(laik_tust, tkr2);
                             sort(&laik_tust.paz[0], &laik_tust.paz[0]+a);
@@ -207,7 +214,23 @@ int amountcheck()
         {
             cin.clear();
             cin.ignore();
-            cout << "Error! Skaicus yra per didelis arba per mazas." << endl;
+            cout << "Error! Skaicus nera tarp 0 ir 10!." << endl;
+            cout << "Iveskite skaiciu is naujo: ";
+            cin >> x;
+            if(cin.fail()){
+                x = failcheck(); 
+            }
+        }
+    return x;
+}
+int amountcheck2()
+{
+    int x;
+    while (x <= 0)
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Error! Skaicus yra mazesnis uz 0!." << endl;
             cout << "Iveskite skaiciu is naujo: ";
             cin >> x;
             if(cin.fail()){
