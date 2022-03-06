@@ -16,12 +16,13 @@ using std::setw;
 
 struct data {
     string vardas="", pavarde="";
-    vector<int> paz, egz;
+    vector<int> paz;
+    int egz = 0, paz_sk = 0;
     double rezult=0;
 };
 
-void isvestis(data& temp, int a, string b);
-void isved(const data& temp, int a);
+void isvestis(data& temp, string b);
+void isved(const data& temp);
 int failcheck();
 int amountcheck();
 
@@ -29,6 +30,7 @@ int main()
 {
     vector<data> sarasas;
     data laik;
+    data laik_tust;
     int n, a;
     string tkr, tkr2, tkr3;
     bool run = true, run2 = true, run3 = true;
@@ -52,15 +54,14 @@ int main()
                 {
                     for(int i = 0; i<n; i++)
                     {
-                        cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> a;
+                        laik_tust = laik;
+                        cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> laik_tust.paz_sk;
                         if(cin.fail()){
-                            a = failcheck(); 
-                            }
-                        laik.paz.reserve(a);
-                        laik.egz.reserve(1);
-                        isvestis(laik, a, tkr2);
-                        sort(&laik.paz[0], &laik.paz[0]+a);
-                        sarasas.push_back(laik);
+                            laik_tust.paz_sk = failcheck(); 
+                        }
+                        isvestis(laik_tust, tkr2);
+                        sort(&laik_tust.paz[0], &laik_tust.paz[0]+laik_tust.paz_sk);
+                        sarasas.push_back(laik_tust);
                         
                     } 
                     run2 = false;
@@ -81,23 +82,21 @@ int main()
                 {
                     while(run3)
                     {
+                        laik_tust = laik;
                         cout << "Ar norite vesti studenta (t/n)?"; cin >> tkr3;
                         if(tkr3 == "n" || tkr3 == "N")
                         {
-                            cout << run3;
                             run3 = false;
                         }
                         else if(tkr3 == "t" || tkr3 == "T")
                         {
-                            cout << "Kiek namu darbu pazymiu vesite?"; cin >> a;
+                            cout << "Kiek namu darbu pazymiu vesite ?"; cin >> laik_tust.paz_sk;
                             if(cin.fail()){
-                                a = failcheck(); 
-                                }
-                            laik.paz.reserve(a);
-                            laik.egz.reserve(1);
-                            isvestis(laik, a, tkr2);
-                            sort(&laik.paz[0], &laik.paz[0]+a);
-                            sarasas.push_back(laik);
+                                laik_tust.paz_sk = failcheck(); 
+                            }
+                            isvestis(laik_tust, tkr2);
+                            sort(&laik_tust.paz[0], &laik_tust.paz[0]+a);
+                            sarasas.push_back(laik_tust);
                         }
                         else
                         {
@@ -122,12 +121,13 @@ int main()
     cout << "------------------------------------------------------------------" << endl;
     for(const auto &el : sarasas)
     {
-        isved(el, a);
+        isved(el);
     }
 }
 
-void isvestis(data& temp, int a, string b)
+void isvestis(data& temp, string b)
 {
+    int laikinas;
     if(b == "t" || b == "T")
     {
         std::random_device rd;
@@ -135,56 +135,55 @@ void isvestis(data& temp, int a, string b)
         std::uniform_int_distribution<int> dist (1,10);
         cout <<"Veskite varda: "; cin >> temp.vardas;
         cout <<"Veskite pavarde: "; cin >> temp.pavarde;
-        for(int i = 0; i < a; i++)
+        for(int i = 0; i < temp.paz_sk; i++)
         {
-            temp.paz[i] = dist(mt);
-            cout << temp.paz[i] << " ";
+            laikinas = dist(mt);
+            temp.paz.push_back(laikinas);
         }
-        temp.egz[0] = dist(mt);
+        temp.egz = dist(mt);
     }
     else
     {
         cout <<"Veskite varda: "; cin >> temp.vardas;
         cout <<"Veskite pavarde: "; cin >> temp.pavarde;
-        for(int i = 0; i < a; i++)
+        for(int i = 0; i < temp.paz_sk; i++)
         {
             cout<<"Isveskite " << i + 1 << "-a(-i) pazymi (nuo 1 iki 10): ";
-            cin >> temp.paz[i];
+            cin >> laikinas;
             if(cin.fail()){
-                temp.paz[i] = failcheck(); 
+                laikinas = failcheck(); 
             }
-            if(temp.paz[i] > 10 || temp.paz[i] <= 0){
-                temp.paz[i] = amountcheck(); 
+            if(laikinas > 10 || laikinas <= 0){
+                laikinas = amountcheck(); 
             }
-        cout << "Veskite egzamino iverti (nuo 1 iki 10): "; cin >> temp.egz[0];
-        if(cin.fail()) temp.egz[0] = failcheck();
-        if(temp.egz[0] > 10 || temp.egz[0] <= 0) temp.egz[0] = amountcheck();
+            temp.paz.push_back(laikinas);
         }
+        cout << "Veskite egzamino iverti (nuo 1 iki 10): "; cin >> temp.egz;
+        if(cin.fail()) temp.egz = failcheck();
+        if(temp.egz > 10 || temp.egz <= 0) temp.egz = amountcheck();
     }
 }
 
-void isved(const data& temp, int a)
+void isved(const data& temp)
 {
     int sum = 0;
     double atsM;
     cout << temp.vardas << setw(19) << temp.pavarde;
-    cout << temp.egz[0] << endl;
-    cout << temp.paz[0] << endl;
-    for(int i = 0; i < a; i++)
+    for(int i = 0; i < temp.paz_sk; i++)
     {
-        sum = sum + temp.paz[i];
+         sum = sum + temp.paz[i];
     }
-    for(int i = 0; i < a; i++)
+    double atsV = sum / temp.paz_sk * 0.4 + temp.egz * 0.6;
+    if ( temp.paz_sk % 2 == 0)
     {
-        cout << std::setw(15) << temp.paz[i];
+        atsM = (temp.paz[temp.paz_sk/2-1] + temp.paz[temp.paz_sk/2]) / 2.0 * 0.4 + temp.egz * 0.6;
     }
-    // double atsV = sum / a * 0.4 + temp.egz[0] * 0.6;
-    // if ( a % 2 == 0)
-    // atsM = (temp.paz[a/2-1] + temp.paz[a/2]) / 2.0 * 0.4 + temp.egz[0] * 0.6;
-    // else
-    // atsM = temp.paz[a/2] * 0.4 + temp.egz[0] * 0.6;
-    // cout << setw(15) << atsV;
-    // cout << setw(15) << atsM << endl;
+    else
+    {
+        atsM = temp.paz[temp.paz_sk/2] * 0.4 + temp.egz * 0.6;
+    }
+    cout << setw(15) << atsV;
+    cout << setw(15) << atsM << endl;
 }
 
 int failcheck()
