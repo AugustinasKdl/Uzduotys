@@ -30,9 +30,8 @@ int main()
     vector<data> sarasas;
     data laik;
     int n, a;
-    string tkr, tkr2;
-    bool run = true;
-    bool run2 = true;
+    string tkr, tkr2, tkr3;
+    bool run = true, run2 = true, run3 = true;
     while(run)
     {
         cout << "Ar zinote studentu skaiciu? (t/n)"; cin >> tkr;
@@ -75,7 +74,44 @@ int main()
         } 
         else if(tkr == "n" || tkr == "N")
         {
-            run = false;
+            while(run2)
+            {
+                cout << "Ar norite generuoti pazymius? (t/n)"; cin >> tkr2;
+                if(tkr2 == "t" || tkr2 == "T" || tkr2 == "n" || tkr2 == "N")
+                {
+                    while(run3)
+                    {
+                        cout << "Ar norite vesti studenta (t/n)?"; cin >> tkr3;
+                        if(tkr3 == "n" || tkr3 == "N")
+                        {
+                            cout << run3;
+                            run3 = false;
+                        }
+                        else if(tkr3 == "t" || tkr3 == "T")
+                        {
+                            cout << "Kiek namu darbu pazymiu vesite (tarp 1 ir 250)?"; cin >> a;
+                            if(cin.fail()){
+                                a = failcheck(); 
+                                }
+                            laik.paz.reserve(a);
+                            laik.egz.reserve(1);
+                            isvestis(laik, a, tkr2);
+                            sort(&laik.paz[0], &laik.paz[0]+a);
+                            sarasas.push_back(laik);
+                        }
+                        else
+                        {
+                            cout << "Error! Ivedimas netinkamas. Prašome pakartoti." << endl;   
+                        }
+                    }   
+                    run2 = false;
+                }    
+                else
+                {
+                    cout << "Error! Ivedimas netinkamas. Prašome pakartoti." << endl;
+                }
+                run = false;
+            }
         }
         else
         {
