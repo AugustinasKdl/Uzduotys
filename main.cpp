@@ -15,8 +15,11 @@ int main()
         {
             cout<<"Miksuotas variantas (skaito eilutemis, iraso per buferi):\n";
             mix("studentai10000.txt", "studentai_copy.txt");
-            //mix("studentai100000.txt", "studentai_copy.txt");
-            //mix("studentai1000000.txt", "studentai_copy.txt");
+            cout <<"Pirmas baigtas!" << endl;
+            mix("studentai100000.txt", "studentai2_copy.txt");
+            cout <<"Antras baigtas!" << endl;
+            mix("studentai1000000.txt", "studentai3_copy.txt");
+            cout <<"Trecias baigtas!" << endl;
             run4 = false;
         }
         else if(tkr4 == "n" || tkr4 == "N")
@@ -49,8 +52,8 @@ int main()
                                 if(laik.paz_sk <= 0){
                                     laik.paz_sk = amountcheck2(); 
                                 }
-                                isvestis(laik, tkr2);
-                                sort(&laik.paz[0], &laik.paz[0]+laik.paz_sk);
+                                input(laik, tkr2);
+                                skaiciavimai(laik);
                                 sarasas.push_back(laik);
                                 
                             } 
@@ -87,8 +90,8 @@ int main()
                                     if(laik.paz_sk <= 0){
                                         laik.paz_sk = amountcheck2(); 
                                     }
-                                    isvestis(laik, tkr2);
-                                    sort(&laik.paz[0], &laik.paz[0]+a);
+                                    input(laik, tkr2);
+                                    skaiciavimai(laik);
                                     sarasas.push_back(laik);
                                 }
                                 else
@@ -112,9 +115,9 @@ int main()
             }
             cout << "Vardas" << setw(21) << "Pavarde" << setw(41) << "Galutinis(Vid.) / Galutinis(Med.)" << endl;
             cout << "------------------------------------------------------------------" << endl;
-            for(const auto &el : sarasas)
+            for(auto &el : sarasas)
             {
-                isved(el);
+                skaiciavimai(el);
             }
             run4 = false;
         }

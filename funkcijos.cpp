@@ -1,5 +1,22 @@
 #include "funkcijos.h"
 
+void toString(data& temp, string& line)
+{
+    string s1, s2, s3;
+    std::stringstream ss;
+    ss << temp.rezult1;
+    ss >> s1;
+    std::stringstream ss2;
+    ss2 << temp.rezult2;
+    ss2 >> s2;
+    s3 = line;
+    if(temp.rezult1 == 10) s3+= "        " + s1;
+    else s3+= "         " + s1;
+    if(temp.rezult2 == 10) s3+= "        " + s2;
+    else s3+= "         " + s2;
+    temp.eilute = s3;
+}
+
 bool isNumber(const string& str)
 {
     for (char const &c : str) {
@@ -15,6 +32,8 @@ void mix(std::string read_file, std::string write_file)
     data laik;
     data laik_tust;
     string eil;
+    string outputas="";
+    string b = "   gal/vid   gal/med";
     //----------------------------------------------------------------------
     std::ifstream open_f(read_file);
     while (open_f){ 
@@ -27,50 +46,56 @@ void mix(std::string read_file, std::string write_file)
     //-----------------------------------------------------------------------              
     for(string &el : splited)
     {
-        std::string buf;            // Have a buffer string
-        std::stringstream ss(el);       // Insert the string into a stream
-        vector<string> tokens; // Create vector to hold our words
-        laik = laik_tust;
-        int j = 0;
-        while (ss >> buf){
-            tokens.push_back(buf);
-        }
-        for(string &el2 : tokens)
+        if(&el == &splited.front()) // works
         {
-            if(isNumber(el2) == true)
-            {
-                int i = 0;
-                if(&el == &tokens.back()){
-                    std::istringstream(el2) >> i;
-                    laik.egz = i;
-                    laik.paz_sk = j - 3;
-                }
-                else{
-                    std::istringstream(el2) >> i;
-                    laik.paz.push_back(i);
-                } 
-            }
-            else if(j == 0){
-                laik.vardas = el2;
-            }
-            else if(j == 1){
-                laik.pavarde = el2; 
-            } 
-            j++;
+            outputas= el + b + "\n";
+            
         }
-        sarasas.push_back(laik);
+        else
+        {
+            std::string buf;            // buffer vektorius
+            std::stringstream ss(el);       // I stream idedame eilute
+            vector<string> tokens; // sukuriame elementus laikanti vektoriu
+            laik = laik_tust;  //istustiname laik vektoriu;
+            while (ss >> buf){ //works
+                tokens.push_back(buf);
+            }
+            int j = 0; 
+            for(string &el2 : tokens) // works
+            {
+                if(isNumber(el2) == true)
+                {
+                    int i = 0;
+                    if(&el2 == &tokens.back())
+                    {
+                        std::istringstream(el2) >> i;
+                        laik.egz = i;
+                        laik.paz_sk = j;
+                    }
+                    else{
+                        std::istringstream(el2) >> i;
+                        laik.paz.push_back(i);
+                    }
+                    j++; 
+                }
+            }
+            skaiciavimai(laik); // ???????????????? kazkodel neveikia XDDD 
+            toString(laik,el);
+            sarasas.push_back(laik); 
+        }
     }
-    
     //----------------------------------------------------------------------
-    string outputas="";
-    for (string &a: splited) (a.compare(*splited.rbegin()) !=0) ? outputas+=a+"\n": outputas+=a ;
+    for (auto &a: sarasas){
+        outputas += a.eilute + "\n"; 
+        //cout << a.eilute;
+    }
     //----------------------------------------------------------------------
     std::ofstream out_f(write_file);
     out_f << outputas;
     out_f.close();
 }
 
-void isvestis(data& temp, string b)
+void input(data& temp, string b)
 {
     int laikinas;
     if(b == "t" || b == "T")
@@ -108,27 +133,32 @@ void isvestis(data& temp, string b)
         if(temp.egz > 10 || temp.egz <= 0) temp.egz = amountcheck();
     }
 }
-
-void isved(const data& temp)
+void output(data& temp)
+{
+    cout<< temp.vardas << " " << temp.pavarde << " " << temp.rezult1 << " " << temp.rezult2;
+}
+void skaiciavimai(data& temp)
 {
     int sum = 0;
-    double atsM;
-    cout << temp.vardas << setw(19) << temp.pavarde;
+    double atsM = 0;
+    double atsV = 0;
+    sort(&temp.paz[0], &temp.paz[0]+temp.paz_sk);
     for(int i = 0; i < temp.paz_sk; i++)
     {
-         sum = sum + temp.paz[i];
+        sum = sum + temp.paz[i];
     }
-    double atsV = sum / temp.paz_sk * 0.4 + temp.egz * 0.6;
+    atsV = sum / temp.paz_sk * 0.4 + temp.egz * 0.6;
+    temp.rezult1 = atsV;
     if ( temp.paz_sk % 2 == 0)
     {
         atsM = (temp.paz[temp.paz_sk/2-1] + temp.paz[temp.paz_sk/2]) / 2.0 * 0.4 + temp.egz * 0.6;
+        temp.rezult2 = atsM;
     }
     else
     {
         atsM = temp.paz[temp.paz_sk/2] * 0.4 + temp.egz * 0.6;
+        temp.rezult2 = atsM;
     }
-    cout << setw(15) << atsV;
-    cout << setw(15) << atsM << endl;
 }
 
 int failcheck()
