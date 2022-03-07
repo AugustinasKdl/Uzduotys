@@ -46,7 +46,7 @@ void mix(std::string read_file, std::string write_file)
     //-----------------------------------------------------------------------              
     for(string &el : splited)
     {
-        if(&el == &splited.front()) // works
+        if(&el == &splited.front())
         {
             outputas= el + b + "\n";
             
@@ -57,11 +57,11 @@ void mix(std::string read_file, std::string write_file)
             std::stringstream ss(el);       // I stream idedame eilute
             vector<string> tokens; // sukuriame elementus laikanti vektoriu
             laik = laik_tust;  //istustiname laik vektoriu;
-            while (ss >> buf){ //works
+            while (ss >> buf){
                 tokens.push_back(buf);
             }
             int j = 0; 
-            for(string &el2 : tokens) // works
+            for(string &el2 : tokens)
             {
                 if(isNumber(el2) == true)
                 {
@@ -79,7 +79,7 @@ void mix(std::string read_file, std::string write_file)
                     j++; 
                 }
             }
-            skaiciavimai(laik); // ???????????????? kazkodel neveikia XDDD 
+            skaiciavimai(laik);
             toString(laik,el);
             sarasas.push_back(laik); 
         }
@@ -87,7 +87,6 @@ void mix(std::string read_file, std::string write_file)
     //----------------------------------------------------------------------
     for (auto &a: sarasas){
         outputas += a.eilute + "\n"; 
-        //cout << a.eilute;
     }
     //----------------------------------------------------------------------
     std::ofstream out_f(write_file);
