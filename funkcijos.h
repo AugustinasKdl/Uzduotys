@@ -28,6 +28,7 @@ struct data {
 };
 
 void input(data& temp, string b);
+void output(data& temp);
 void skaiciavimai(data& temp);
 int failcheck();
 int amountcheck();

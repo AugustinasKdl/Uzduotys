@@ -117,7 +117,7 @@ int main()
             cout << "------------------------------------------------------------------" << endl;
             for(auto &el : sarasas)
             {
-                skaiciavimai(el);
+                output(el);
             }
             run4 = false;
         }

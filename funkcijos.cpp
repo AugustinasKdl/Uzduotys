@@ -135,7 +135,7 @@ void input(data& temp, string b)
 }
 void output(data& temp)
 {
-    cout<< temp.vardas << " " << temp.pavarde << " " << temp.rezult1 << " " << temp.rezult2;
+    cout<< temp.vardas << setw(21) << temp.pavarde << setw(21) << temp.rezult1 << setw(15) << temp.rezult2 << endl;
 }
 void skaiciavimai(data& temp)
 {
