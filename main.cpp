@@ -6,20 +6,52 @@ int main()
     data laik;
     data laik_tust;
     int n, a;
-    string tkr, tkr2, tkr3, tkr4;
-    bool run = true, run2 = true, run3 = true, run4 = true;
+    string tkr, tkr2, tkr3, tkr4, tkr5;
+    bool run = true, run2 = true, run3 = true, run4 = true, run5 = true;
     while(run4) // Patikrina ar vartotojas nori skaityti duomenis is failo
     {
         cout << "Ar norite nuskaityti is failo (t/n)? "; cin >> tkr4;
         if(tkr4 == "t" || tkr4 == "T")
         {
-            cout<<"Miksuotas variantas (skaito eilutemis, iraso per buferi):\n";
-            mix("studentai10000.txt", "studentai_copy.txt");
-            // cout <<"Pirmas baigtas!" << endl;
-            // mix("studentai100000.txt", "studentai2_copy.txt");
-            // cout <<"Antras baigtas!" << endl;
-            // mix("studentai1000000.txt", "studentai3_copy.txt");
-            // cout <<"Trecias baigtas!" << endl;
+            while(run5)
+            {
+                cout << "Ar jau turite studentu faila (t/n)?"; cin >> tkr5;
+                if(tkr5 == "t" || tkr5 == "T")
+                {
+                    cout<<"Miksuotas variantas (skaito eilutemis, iraso per buferi):\n";
+                    mix("studentai10000.txt", "studentai_copy.txt");
+                    cout <<"Pirmas baigtas!" << endl;
+                    mix("studentai100000.txt", "studentai2_copy.txt");
+                    cout <<"Antras baigtas!" << endl;
+                    mix("studentai1000000.txt", "studentai3_copy.txt");
+                    cout <<"Trecias baigtas!" << endl;
+                    run5 = false;
+                }
+                else if(tkr5 == "n" || tkr5 == "N")
+                {
+                    string new_file = "Generuoti_stud1000.txt", rez_file = "Isvedami_stud.txt1000"; // new file - generuojamas filas, rez_file - rezultatu filas.
+                    int paz = 5, stud = 1000; // paz - pazimiu skaicius, stud - studentu skaicius;
+                    mix_generate(new_file, rez_file, paz, stud);
+
+                    // stud = 10000; new_file = "Generuoti_stud10000.txt"; rez_file = "Isvedami_stud.txt10000";
+                    // mix_generate(new_file, rez_file, paz, stud);
+
+                    // stud = 100000; new_file = "Generuoti_stud100000.txt"; rez_file = "Isvedami_stud.txt100000";
+                    // mix_generate(new_file, rez_file, paz, stud);
+                    
+                    // stud = 1000000; new_file = "Generuoti_stud1000000.txt"; rez_file = "Isvedami_stud.txt1000000";
+                    // mix_generate(new_file, rez_file, paz, stud);
+                    
+                    // stud = 10000000; new_file = "Generuoti_stud10000000.txt"; rez_file = "Isvedami_stud.txt10000000";
+                    // mix_generate(new_file, rez_file, paz, stud);
+
+                    run5 = false;
+                }
+                else
+                {
+                    cout << "Error! Ivedimas netinkamas. Prašome pakartoti." << endl;
+                }
+            }
             run4 = false;
         }
         else if(tkr4 == "n" || tkr4 == "N")

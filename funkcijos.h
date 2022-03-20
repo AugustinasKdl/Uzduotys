@@ -10,6 +10,9 @@
 #include <iterator>
 #include <algorithm>
 #include <random>
+#include <chrono>
+#include <ctime>
+#include <ratio>
 
 using std::cout;
 using std::cin;
@@ -18,6 +21,9 @@ using std::vector;
 using std::sort;
 using std::endl;
 using std::setw;
+using namespace std::chrono;
+typedef std::chrono::high_resolution_clock Clock;
+
 
 struct data {
     string vardas="", pavarde="";
@@ -37,3 +43,5 @@ void bufer_nusk(string read_file, string write_file);
 void mix(std::string read_file, std::string write_file);
 bool isNumber(const string& str);
 void toString(data& temp, string& line);
+void mix_generate(string gen_file, string rez_file, int n, int k);
+void eilute_test(string gen_file, string rez_file, int n, int k);

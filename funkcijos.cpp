@@ -220,3 +220,114 @@ int amountcheck2()
         }
     return x;
 }
+
+void mix_generate(string gen_file, string rez_file, int n, int k)
+{
+    auto t1 = Clock::now();
+    duration<double> diff;
+    string outputas="Vardas                   Pavarde                    ";
+    string gapV = "                  ", gapP = "                    ", gap = " ", gapND = "       ";
+    int x = 10;
+    for(int i = 0; i < n; i++)
+    {
+        if(i+1 == x)
+        {
+            gapND.pop_back();
+            x = x * 10;
+        }
+        string a;
+        std::stringstream ss;
+        ss << i+1;
+        ss >> a;
+        outputas = outputas + "ND" + (a) + gapND;
+    }
+    outputas = outputas + "Egz.\n";
+    for(int i = 0; i < k; i++)
+    {
+        string a, c;
+        std::stringstream ss;
+        ss << i+1;
+        ss >> a;
+        if(i+1 == x)
+        {
+            gapV.pop_back();
+            gapV.pop_back();
+            x = x * 10;
+        }
+        for(int j = 0; j < n+1; j++)
+        {
+            // std::random_device rd;
+            // std::mt19937 mt(rd());
+            // std::uniform_int_distribution<int> dist (1,10);
+            // int temp = dist(mt);
+            srand (time(NULL));
+            int temp = rand() % 10;
+            string b, z = "         ";
+            if(temp == 10){
+                z.pop_back();
+            }
+            std::stringstream ss;
+            ss << temp;
+            ss >> b;
+            c += b + z;
+        }
+        outputas += "Vardas"+ a + gapV + "Pavarde" + a + gapP + c + "\n";
+    }
+    auto t2 = Clock::now();
+    diff = t2-t1;
+    cout << "Uztruko: " << diff.count() << " s. Sukurti duomenis: " << k << " skaic. studentu \n";
+    auto t3 = Clock::now();
+    std::ofstream in(gen_file);
+    in << outputas;
+    in.close();
+    auto t4 = Clock::now();
+    diff = t4-t3;
+    cout << "Uztruko: " << diff.count() << " s. ikelti duomenis \n";
+}
+
+void eilute_test(string gen_file, string rez_file, int n, int k)
+{
+    string outputas="Vardas                   Pavarde                    ";
+    string gapV = "                  ", gapP = "                    ", gap = " ", gapND = "       ";
+    int x = 10;
+    for(int i = 0; i < n; i++)
+    {
+        if(i+1 == x)
+        {
+            gapND.pop_back();
+            x = x * 10;
+        }
+        string a;
+        std::stringstream ss;
+        ss << i+1;
+        ss >> a;
+        outputas = outputas + "ND" + (a) + gapND;
+    }
+    std::ofstream in(gen_file);
+    in << outputas;
+    for(int i = 0; i < k; i++)
+    {
+        if(i+1 == x)
+        {
+            gapV.pop_back();
+            gapV.pop_back();
+            x = x * 10;
+        }
+        in << "Vardas" << i << gapV << "Pavarde" << i << gapP;
+        for(int j = 0; j < n+1; j++)
+        {
+            std::random_device rd;
+            std::mt19937 mt(rd());
+            std::uniform_int_distribution<int> dist (1,10);
+            int temp = dist(mt);
+            string z = "         ";
+            if(temp == 10){
+                z.pop_back();
+            }
+            in << temp << z;
+        } 
+        in << "\n";
+    }
+    in.close();
+    auto t1 = Clock::now();
+}
