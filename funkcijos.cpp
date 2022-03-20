@@ -25,7 +25,7 @@ bool isNumber(const string& str)
     return true;
 }
 
-void mix(std::string read_file, std::string write_file)
+void mix(string read_file, string write_file)
 {
     vector<std::string> splited;
     vector<data> sarasas;
@@ -35,14 +35,28 @@ void mix(std::string read_file, std::string write_file)
     string outputas="";
     string b = "   gal/vid   gal/med";
     //----------------------------------------------------------------------
-    std::ifstream open_f(read_file);
-    while (open_f){ 
-        if (!open_f.eof()) {
-            std::getline(open_f, eil);
-            splited.push_back(eil);}
-        else break;
+    try{
+        std::ifstream open_f(read_file);
+        if(open_f.peek() == EOF)
+        {
+            throw 1;
+        }
+        else
+        {
+           while (open_f){ 
+                if (!open_f.eof()) {
+                    std::getline(open_f, eil);
+                    splited.push_back(eil);}
+                else break;
+            }
+            open_f.close(); 
+        }
     }
-    open_f.close();
+    catch(int x){
+        cout << "Failas tuscias!! ERROR Nr. " << x;
+        std::terminate;
+    }
+    
     //-----------------------------------------------------------------------              
     for(string &el : splited)
     {
