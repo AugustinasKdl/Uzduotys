@@ -30,7 +30,7 @@ struct data {
     vector<int> paz;
     int egz = 0, paz_sk = 0;
     int rezult1 = 0, rezult2 = 0;
-    string eilute;
+    string eilute, eilute2;
 };
 
 void input(data& temp, string b);

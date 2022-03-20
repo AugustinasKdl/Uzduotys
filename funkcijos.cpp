@@ -293,7 +293,7 @@ void mix2(string read_file)
     data laik;
     data laik_tust;
     string eil;
-    string outputas="";
+    string outputas, outputas2;
     //----------------------------------------------------------------------
     try{
         std::ifstream open_f(read_file);
@@ -321,7 +321,7 @@ void mix2(string read_file)
     {
         if(&el == &splited.front())
         {
-            outputas= "Vardas                   Pavarde                    gal/vid\n";
+            outputas= "Vardas                   Pavarde                  gal/vid\n";
             
         }
         else
@@ -343,7 +343,7 @@ void mix2(string read_file)
                     {
                         std::istringstream(el2) >> i;
                         laik.egz = i;
-                        laik.paz_sk = j-2;
+                        laik.paz_sk = j;
                     }
                     else{
                         std::istringstream(el2) >> i;
@@ -351,13 +351,6 @@ void mix2(string read_file)
                     }
                     j++;
                 }
-                if(j=0){
-                    laik.vardas = el2;
-                }
-                else if(j=1){
-                    laik.pavarde = el2;
-                }
-                j++;
             }
             skaiciavimai2(laik);
             toString2(laik,el);
@@ -366,13 +359,16 @@ void mix2(string read_file)
     }
     //----------------------------------------------------------------------
     for (auto &a: sarasas){
-        outputas += a.eilute + "\n"; 
+        outputas += a.eilute;
+        outputas2 += a.eilute2; 
     }
     //----------------------------------------------------------------------
-    std::ofstream out_f("testas.txt");
+    std::ofstream out_f("nuskriaustukai.txt");
     out_f << outputas;
     out_f.close();
-    cout << 1;
+    std::ofstream out2_f("galvociai.txt");
+    out2_f << outputas2;
+    out2_f.close();
 }
 void skaiciavimai2(data& temp)
 {
@@ -387,10 +383,20 @@ void skaiciavimai2(data& temp)
 }
 void toString2(data& temp, string& line)
 {
-    string s1, s2, s3;
+    string s1, s2, s3, s4;
     std::stringstream ss;
-    ss << temp.rezult1;
-    ss >> s1;
-    s3 = line.substr(0, 53) + s1;
+    if(temp.rezult1 < 5)
+    {
+        ss << temp.rezult1;
+        ss >> s1;
+        s3 = line.substr(0, 53) + s1 + "\n";
+    }
+    else
+    {
+        ss << temp.rezult1;
+        ss >> s2;
+        s4 = line.substr(0, 53) + s2 + "\n";   
+    }
     temp.eilute = s3;
+    temp.eilute2 = s4;
 }

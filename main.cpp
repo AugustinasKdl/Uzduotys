@@ -29,12 +29,10 @@ int main()
                 }
                 else if(tkr5 == "n" || tkr5 == "N")
                 {
-                    string new_file = "Generuoti_stud1000.txt"; // new file - generuojamas filas, rez_file - rezultatu filas.
+                    string new_file = "stud1000.txt"; // new file - generuojamas filas, rez_file - rezultatu filas.
                     int paz = 5, stud = 1000; // paz - pazimiu skaicius, stud - studentu skaicius;
                     mix_generate(new_file, paz, stud);
-                    cout << 1;
-                    mix("Generuoti_stud1000.txt","test.txt");
-                    cout << 2;
+                    mix2("studentai1000000.txt");
 
                     // stud = 10000; new_file = "Generuoti_stud10000.txt";
                     // mix_generate(new_file, paz, stud);
