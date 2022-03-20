@@ -223,7 +223,11 @@ int amountcheck2()
 
 void mix_generate(string gen_file, string rez_file, int n, int k)
 {
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> dist (1,10);
     auto t1 = Clock::now();
+    srand(time(0));
     duration<double> diff;
     string outputas="Vardas                   Pavarde                    ";
     string gapV = "                  ", gapP = "                    ", gap = " ", gapND = "       ";
@@ -256,12 +260,8 @@ void mix_generate(string gen_file, string rez_file, int n, int k)
         }
         for(int j = 0; j < n+1; j++)
         {
-            // std::random_device rd;
-            // std::mt19937 mt(rd());
-            // std::uniform_int_distribution<int> dist (1,10);
-            // int temp = dist(mt);
-            srand (time(NULL));
-            int temp = rand() % 10;
+            int temp = dist(mt);
+            //int temp = (rand() % 10) + 1;
             string b, z = "         ";
             if(temp == 10){
                 z.pop_back();

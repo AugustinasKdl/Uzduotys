@@ -33,17 +33,17 @@ int main()
                     int paz = 5, stud = 1000; // paz - pazimiu skaicius, stud - studentu skaicius;
                     mix_generate(new_file, rez_file, paz, stud);
 
-                    // stud = 10000; new_file = "Generuoti_stud10000.txt"; rez_file = "Isvedami_stud.txt10000";
-                    // mix_generate(new_file, rez_file, paz, stud);
+                    stud = 10000; new_file = "Generuoti_stud10000.txt"; rez_file = "Isvedami_stud.txt10000";
+                    mix_generate(new_file, rez_file, paz, stud);
 
-                    // stud = 100000; new_file = "Generuoti_stud100000.txt"; rez_file = "Isvedami_stud.txt100000";
-                    // mix_generate(new_file, rez_file, paz, stud);
+                    stud = 100000; new_file = "Generuoti_stud100000.txt"; rez_file = "Isvedami_stud.txt100000";
+                    mix_generate(new_file, rez_file, paz, stud);
                     
-                    // stud = 1000000; new_file = "Generuoti_stud1000000.txt"; rez_file = "Isvedami_stud.txt1000000";
-                    // mix_generate(new_file, rez_file, paz, stud);
+                    stud = 1000000; new_file = "Generuoti_stud1000000.txt"; rez_file = "Isvedami_stud.txt1000000";
+                    mix_generate(new_file, rez_file, paz, stud);
                     
-                    // stud = 10000000; new_file = "Generuoti_stud10000000.txt"; rez_file = "Isvedami_stud.txt10000000";
-                    // mix_generate(new_file, rez_file, paz, stud);
+                    stud = 10000000; new_file = "Generuoti_stud10000000.txt"; rez_file = "Isvedami_stud.txt10000000";
+                    mix_generate(new_file, rez_file, paz, stud);
 
                     run5 = false;
                 }
