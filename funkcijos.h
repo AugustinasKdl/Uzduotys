@@ -36,12 +36,13 @@ struct data {
 void input(data& temp, string b);
 void output(data& temp);
 void skaiciavimai(data& temp);
+void skaiciavimai2(data& temp);
 int failcheck();
 int amountcheck();
 int amountcheck2();
-void bufer_nusk(string read_file, string write_file);
-void mix(std::string read_file, std::string write_file);
+void mix(string read_file, string write_file);
 bool isNumber(const string& str);
 void toString(data& temp, string& line);
-void mix_generate(string gen_file, string rez_file, int n, int k);
-void eilute_test(string gen_file, string rez_file, int n, int k);
+void toString2(data& temp, string& line);
+void mix_generate(string gen_file, int n, int k);
+void mix2(string read_file);

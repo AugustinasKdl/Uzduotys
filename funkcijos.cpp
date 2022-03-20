@@ -221,7 +221,7 @@ int amountcheck2()
     return x;
 }
 
-void mix_generate(string gen_file, string rez_file, int n, int k)
+void mix_generate(string gen_file, int n, int k)
 {
     std::random_device rd;
     std::mt19937 mt(rd());
@@ -283,51 +283,114 @@ void mix_generate(string gen_file, string rez_file, int n, int k)
     auto t4 = Clock::now();
     diff = t4-t3;
     cout << "Uztruko: " << diff.count() << " s. ikelti duomenis \n";
+    //mix2(gen_file);
 }
 
-void eilute_test(string gen_file, string rez_file, int n, int k)
+void mix2(string read_file)
 {
-    string outputas="Vardas                   Pavarde                    ";
-    string gapV = "                  ", gapP = "                    ", gap = " ", gapND = "       ";
-    int x = 10;
-    for(int i = 0; i < n; i++)
-    {
-        if(i+1 == x)
+    vector<std::string> splited;
+    vector<data> sarasas;
+    data laik;
+    data laik_tust;
+    string eil;
+    string outputas="";
+    //----------------------------------------------------------------------
+    try{
+        std::ifstream open_f(read_file);
+        if(open_f.peek() == EOF)
         {
-            gapND.pop_back();
-            x = x * 10;
+            throw 1;
         }
-        string a;
-        std::stringstream ss;
-        ss << i+1;
-        ss >> a;
-        outputas = outputas + "ND" + (a) + gapND;
-    }
-    std::ofstream in(gen_file);
-    in << outputas;
-    for(int i = 0; i < k; i++)
-    {
-        if(i+1 == x)
+        else
         {
-            gapV.pop_back();
-            gapV.pop_back();
-            x = x * 10;
-        }
-        in << "Vardas" << i << gapV << "Pavarde" << i << gapP;
-        for(int j = 0; j < n+1; j++)
-        {
-            std::random_device rd;
-            std::mt19937 mt(rd());
-            std::uniform_int_distribution<int> dist (1,10);
-            int temp = dist(mt);
-            string z = "         ";
-            if(temp == 10){
-                z.pop_back();
+           while (open_f){ 
+                if (!open_f.eof()) {
+                    std::getline(open_f, eil);
+                    splited.push_back(eil);}
+                else break;
             }
-            in << temp << z;
-        } 
-        in << "\n";
+            open_f.close(); 
+        }
     }
-    in.close();
-    auto t1 = Clock::now();
+    catch(int x){
+        cout << "Failas tuscias!! ERROR Nr. " << x;
+        std::terminate;
+    }
+    //-----------------------------------------------------------------------              
+    for(string &el : splited)
+    {
+        if(&el == &splited.front())
+        {
+            outputas= "Vardas                   Pavarde                    gal/vid\n";
+            
+        }
+        else
+        {
+            std::string buf;            // buffer vektorius
+            std::stringstream ss(el);       // I stream idedame eilute
+            vector<string> tokens; // sukuriame elementus laikanti vektoriu
+            laik = laik_tust;  //istustiname laik vektoriu;
+            while (ss >> buf){
+                tokens.push_back(buf);
+            }
+            int j = 0; 
+            for(string &el2 : tokens)
+            {
+                if(isNumber(el2) == true)
+                {
+                    int i = 0;
+                    if(&el2 == &tokens.back())
+                    {
+                        std::istringstream(el2) >> i;
+                        laik.egz = i;
+                        laik.paz_sk = j-2;
+                    }
+                    else{
+                        std::istringstream(el2) >> i;
+                        laik.paz.push_back(i);
+                    }
+                    j++;
+                }
+                if(j=0){
+                    laik.vardas = el2;
+                }
+                else if(j=1){
+                    laik.pavarde = el2;
+                }
+                j++;
+            }
+            skaiciavimai2(laik);
+            toString2(laik,el);
+            sarasas.push_back(laik); 
+        }
+    }
+    //----------------------------------------------------------------------
+    for (auto &a: sarasas){
+        outputas += a.eilute + "\n"; 
+    }
+    //----------------------------------------------------------------------
+    std::ofstream out_f("testas.txt");
+    out_f << outputas;
+    out_f.close();
+    cout << 1;
+}
+void skaiciavimai2(data& temp)
+{
+    int sum = 0;
+    double atsV = 0;
+    for(int i = 0; i < temp.paz_sk; i++)
+    {
+        sum = sum + temp.paz[i];
+    }
+    atsV = sum / temp.paz_sk * 0.4 + temp.egz * 0.6;
+    temp.rezult1 = atsV;
+}
+void toString2(data& temp, string& line)
+{
+    string s1, s2, s3;
+    std::stringstream ss;
+    ss << temp.rezult1;
+    ss >> s1;
+    s3 = line.substr(0, 53) + s1;
+    temp.eilute = s3;
 }
