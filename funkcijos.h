@@ -45,4 +45,4 @@ bool isNumber(const string& str);
 void toString(data& temp, string& line);
 void toString2(data& temp, string& line);
 void mix_generate(string gen_file, int n, int k);
-void mix2(string read_file);
+void mix2(string read_file, int k);

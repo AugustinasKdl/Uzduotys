@@ -29,22 +29,21 @@ int main()
                 }
                 else if(tkr5 == "n" || tkr5 == "N")
                 {
-                    string new_file = "stud1000.txt"; // new file - generuojamas filas, rez_file - rezultatu filas.
+                    string new_file = "Generuoti_stud1000.txt"; // new file - generuojamas filas.
                     int paz = 5, stud = 1000; // paz - pazimiu skaicius, stud - studentu skaicius;
                     mix_generate(new_file, paz, stud);
-                    mix2("studentai1000000.txt");
 
-                    // stud = 10000; new_file = "Generuoti_stud10000.txt";
-                    // mix_generate(new_file, paz, stud);
+                    stud = 10000; new_file = "Generuoti_stud10000.txt";
+                    mix_generate(new_file, paz, stud);
 
-                    // stud = 100000; new_file = "Generuoti_stud100000.txt";
-                    // mix_generate(new_file, paz, stud);
+                    stud = 100000; new_file = "Generuoti_stud100000.txt";
+                    mix_generate(new_file, paz, stud);
                     
-                    // stud = 1000000; new_file = "Generuoti_stud1000000.txt";
-                    // mix_generate(new_file, paz, stud);
+                    stud = 1000000; new_file = "Generuoti_stud1000000.txt";
+                    mix_generate(new_file, paz, stud);
                     
-                    // stud = 10000000; new_file = "Generuoti_stud10000000.txt";
-                    // mix_generate(new_file, paz, stud);
+                    stud = 10000000; new_file = "Generuoti_stud10000000.txt";
+                    mix_generate(new_file, paz, stud);
                     run5 = false;
                 }
                 else
