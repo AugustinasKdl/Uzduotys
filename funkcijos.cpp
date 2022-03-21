@@ -49,12 +49,60 @@ void mix(string read_file, string write_file)
                     splited.push_back(eil);}
                 else break;
             }
-            open_f.close(); 
+            open_f.close();
+            for(string &el : splited)
+            {
+                if(&el == &splited.front())
+                {
+                    outputas= el + b + "\n";
+                    
+                }
+                else
+                {
+                    std::string buf;            // buffer vektorius
+                    std::stringstream ss(el);       // I stream idedame eilute
+                    vector<string> tokens; // sukuriame elementus laikanti vektoriu
+                    laik = laik_tust;  //istustiname laik vektoriu;
+                    while (ss >> buf){
+                        tokens.push_back(buf);
+                    }
+                    int j = 0; 
+                    for(string &el2 : tokens)
+                    {
+                        if(isNumber(el2) == true)
+                        {
+                            int i = 0;
+                            if(&el2 == &tokens.back())
+                            {
+                                std::istringstream(el2) >> i;
+                                laik.egz = i;
+                                laik.paz_sk = j;
+                            }
+                            else{
+                                std::istringstream(el2) >> i;
+                                laik.paz.push_back(i);
+                            }
+                            j++; 
+                        }
+                    }
+                    skaiciavimai(laik);
+                    toString(laik,el);
+                    sarasas.push_back(laik); 
+                }
+            }
+            //----------------------------------------------------------------------
+            for (auto &a: sarasas){
+                outputas += a.eilute + "\n"; 
+            }
+            //----------------------------------------------------------------------
+            std::ofstream out_f(write_file);
+            out_f << outputas;
+            out_f.close();
         }
     }
     catch(int x){
-        cout << "Failas tuscias!! ERROR Nr. " << x;
-        std::terminate;
+        cout << "Failas tuscias!! ERROR Nr. " << x << "\n";
+        std::abort;
     }
     
     //-----------------------------------------------------------------------              

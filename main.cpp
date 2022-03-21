@@ -15,11 +15,11 @@ int main()
         {
             cout<<"Miksuotas variantas (skaito eilutemis, iraso per buferi):\n";
             mix("studentai10000.txt", "studentai_copy.txt");
-            // cout <<"Pirmas baigtas!" << endl;
-            // mix("studentai100000.txt", "studentai2_copy.txt");
-            // cout <<"Antras baigtas!" << endl;
-            // mix("studentai1000000.txt", "studentai3_copy.txt");
-            // cout <<"Trecias baigtas!" << endl;
+            cout <<"Pirmas baigtas!" << endl;
+            mix("studentai100000.txt", "studentai2_copy.txt");
+            cout <<"Antras baigtas!" << endl;
+            mix("studentai1000000.txt", "studentai3_copy.txt");
+            cout <<"Trecias baigtas!" << endl;
             run4 = false;
         }
         else if(tkr4 == "n" || tkr4 == "N")
