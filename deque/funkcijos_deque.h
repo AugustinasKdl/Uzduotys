@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream> 
 #include <string>
-#include <vector>
+#include <deque>
 #include <iterator>
 #include <algorithm>
 #include <random>
@@ -17,7 +17,7 @@
 using std::cout;
 using std::cin;
 using std::string;
-using std::vector;
+using std::deque;
 using std::sort;
 using std::endl;
 using std::setw;
@@ -27,7 +27,7 @@ typedef std::chrono::high_resolution_clock Clock;
 
 struct data {
     string vardas="", pavarde="";
-    vector<int> paz;
+    deque<int> paz;
     int egz = 0, paz_sk = 0;
     int rezult1 = 0, rezult2 = 0;
     string eilute, eilute2;

@@ -210,8 +210,8 @@ void mix_generate(string gen_file, int n, int k, string tkr)
 void mix2(string read_file, int k)
 {
     int kodel = 0;
-    vector<std::string> splited;
-    vector<data> sarasas;
+    deque<std::string> splited;
+    deque<data> sarasas;
     data laik;
     data laik_tust;
     string eil;
@@ -250,7 +250,7 @@ void mix2(string read_file, int k)
         {
             std::string buf;            // buffer vektorius
             std::stringstream ss(el);       // I stream idedame eilute
-            vector<string> tokens; // sukuriame elementus laikanti vektoriu
+            deque<string> tokens; // sukuriame elementus laikanti vektoriu
             laik = laik_tust;  //istustiname laik vektoriu;
             while (ss >> buf){
                 tokens.push_back(buf);
