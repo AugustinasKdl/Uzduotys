@@ -3,10 +3,10 @@
 void toString(data& temp, string& line)
 {
     string s1, s2, s3;
-    std::stringstream ss;
+    stringstream ss;
     ss << temp.rezult1;
     ss >> s1;
-    std::stringstream ss2;
+    stringstream ss2;
     ss2 << temp.rezult2;
     ss2 >> s2;
     s3 = line;
@@ -20,7 +20,7 @@ void toString(data& temp, string& line)
 bool isNumber(const string& str)
 {
     for (char const &c : str) {
-        if (std::isdigit(c) == 0) return false;
+        if (isdigit(c) == 0) return false;
     }
     return true;
 }
@@ -30,9 +30,9 @@ void input(data& temp, string b)
     int laikinas;
     if(b == "t" || b == "T")
     {
-        std::random_device rd;
-        std::mt19937 mt(rd());
-        std::uniform_int_distribution<int> dist (1,10);
+        random_device rd;
+        mt19937 mt(rd());
+        uniform_int_distribution<int> dist (1,10);
         cout <<"Veskite varda: "; cin >> temp.vardas;
         cout <<"Veskite pavarde: "; cin >> temp.pavarde;
         for(int i = 0; i < temp.paz_sk; i++)
@@ -140,9 +140,9 @@ int amountcheck2()
 
 void mix_generate(string gen_file, int n, int k, string tkr)
 {
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist (1,10);
+    random_device rd;
+    mt19937 mt(rd());
+    uniform_int_distribution<int> dist (1,10);
     auto t1 = Clock::now();
     duration<double> diff;
     string outputas="Vardas                   Pavarde                    ";
@@ -156,7 +156,7 @@ void mix_generate(string gen_file, int n, int k, string tkr)
             x = x * 10;
         }
         string a;
-        std::stringstream ss;
+        stringstream ss;
         ss << i+1;
         ss >> a;
         outputas = outputas + "ND" + (a) + gapND;
@@ -165,7 +165,7 @@ void mix_generate(string gen_file, int n, int k, string tkr)
     for(int i = 0; i < k; i++)
     {
         string a, c;
-        std::stringstream ss;
+        stringstream ss;
         ss << i+1;
         ss >> a;
         if(i+1 == x)
@@ -181,7 +181,7 @@ void mix_generate(string gen_file, int n, int k, string tkr)
             if(temp == 10){
                 z.pop_back();
             }
-            std::stringstream ss;
+            stringstream ss;
             ss << temp;
             ss >> b;
             c += b + z;
@@ -193,7 +193,7 @@ void mix_generate(string gen_file, int n, int k, string tkr)
     diff = t2-t1;
     cout << "Uztruko: " << diff.count() << " s. Sukurti duomenis: " << k << " skaic. studentu. \n";
     auto t3 = Clock::now();
-    std::ofstream in(gen_file);
+    ofstream in(gen_file);
     in << outputas;
     in.close();
     auto t4 = Clock::now();
@@ -210,7 +210,7 @@ void mix_generate(string gen_file, int n, int k, string tkr)
 void mix2(string read_file, int k)
 {
     int kodel = 0;
-    deque<std::string> splited;
+    deque<string> splited;
     deque<data> sarasas;
     data laik;
     data laik_tust;
@@ -218,7 +218,7 @@ void mix2(string read_file, int k)
     string outputas, outputas2;
     //----------------------------------------------------------------------
     try{
-        std::ifstream open_f(read_file);
+        ifstream open_f(read_file);
         if(open_f.peek() == EOF)
         {
             throw 1;
@@ -227,7 +227,7 @@ void mix2(string read_file, int k)
         {
            while (open_f){ 
                 if (!open_f.eof()) {
-                    std::getline(open_f, eil);
+                    getline(open_f, eil);
                     splited.push_back(eil);}
                 else break;
             }
@@ -236,7 +236,7 @@ void mix2(string read_file, int k)
     }
     catch(int x){
         cout << "Failas tuscias!! ERROR Nr. " << x;
-        std::terminate;
+        terminate;
     }
     //-----------------------------------------------------------------------              
     for(string &el : splited)
@@ -248,8 +248,8 @@ void mix2(string read_file, int k)
         }
         else
         {
-            std::string buf;            // buffer vektorius
-            std::stringstream ss(el);       // I stream idedame eilute
+            string buf;            // buffer vektorius
+            stringstream ss(el);       // I stream idedame eilute
             deque<string> tokens; // sukuriame elementus laikanti vektoriu
             laik = laik_tust;  //istustiname laik vektoriu;
             while (ss >> buf){
@@ -263,12 +263,12 @@ void mix2(string read_file, int k)
                     int i = 0;
                     if(&el2 == &tokens.back())
                     {
-                        std::istringstream(el2) >> i;
+                        istringstream(el2) >> i;
                         laik.egz = i;
                         laik.paz_sk = j;
                     }
                     else{
-                        std::istringstream(el2) >> i;
+                        istringstream(el2) >> i;
                         laik.paz.push_back(i);
                     }
                     j++;
@@ -287,15 +287,15 @@ void mix2(string read_file, int k)
     }
     //----------------------------------------------------------------------
     string outf_name = "nuskriaustukai", outf2_name = "galvociai", temps="";
-    std::stringstream ss;
+    stringstream ss;
     ss << k;
     ss >> temps;
     outf_name += temps + ".txt"; 
     outf2_name += temps + ".txt";
-    std::ofstream out_f(outf_name);
+    ofstream out_f(outf_name);
     out_f << outputas;
     out_f.close();
-    std::ofstream out2_f(outf2_name);
+    ofstream out2_f(outf2_name);
     out2_f << outputas2;
     out2_f.close();
 }
@@ -313,7 +313,7 @@ void skaiciavimai2(data& temp)
 void toString2(data& temp, string& line)
 {
     string s1, s2, s3, s4;
-    std::stringstream ss;
+    stringstream ss;
     if(temp.rezult1 < 5)
     {
         ss << temp.rezult1;

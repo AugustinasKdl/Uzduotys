@@ -2,7 +2,7 @@
 
 int main()
 {
-    vector<data> sarasas;
+    list<data> sarasas;
     data laik;
     data laik_tust;
     int n, a;
@@ -96,7 +96,6 @@ int main()
                     if(n <= 0){
                         n = amountcheck2(); 
                     }
-                    sarasas.reserve(n);
                     while(run2) // Patikrina ar vartotojas nori automatiskai generuti pazimius
                     {
                         cout << "Ar norite generuoti pazymius (t/n)? "; cin >> tkr2;

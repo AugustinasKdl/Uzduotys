@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream> 
 #include <string>
+#include <list>
 #include <vector>
 #include <iterator>
 #include <algorithm>
@@ -17,17 +18,27 @@
 using std::cout;
 using std::cin;
 using std::string;
-using std::vector;
+using std::list;
 using std::sort;
 using std::endl;
 using std::setw;
+using std::random_device;
+using std::mt19937;
+using std::uniform_int_distribution;
+using std::stringstream;
+using std::istringstream;
+using std::isdigit;
+using std::ifstream;
+using std::ofstream;
+using std::terminate;
+using std::getline;
 using namespace std::chrono;
 typedef std::chrono::high_resolution_clock Clock;
 
 
 struct data {
     string vardas="", pavarde="";
-    vector<int> paz;
+    list<int> paz;
     int egz = 0, paz_sk = 0;
     int rezult1 = 0, rezult2 = 0;
     string eilute, eilute2;

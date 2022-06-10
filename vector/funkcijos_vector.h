@@ -21,6 +21,16 @@ using std::vector;
 using std::sort;
 using std::endl;
 using std::setw;
+using std::random_device;
+using std::mt19937;
+using std::uniform_int_distribution;
+using std::stringstream;
+using std::istringstream;
+using std::isdigit;
+using std::ifstream;
+using std::ofstream;
+using std::terminate;
+using std::getline;
 using namespace std::chrono;
 typedef std::chrono::high_resolution_clock Clock;
 
