@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "funkcijos_vector.h"
 
 int main()
 {

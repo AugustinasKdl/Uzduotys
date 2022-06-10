@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "funkcijos_deque.h"
 
 void toString(data& temp, string& line)
 {

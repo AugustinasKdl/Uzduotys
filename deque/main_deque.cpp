@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "funkcijos_deque.h"
 
 int main()
 {
