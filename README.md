@@ -42,8 +42,9 @@
   * Desque aplankale - **std::desque** versija
   * List aplankale - **std::list** versija
 
-# v1.0
-* Kiekvienai versijai pridetos dvi naujos duomenų skaidymo strategijos
+# v1.0.2
+* Pataisyta v1.0 versija.
+* Kiekvienai versijai pridetos dvi naujos duomenų skaidymo strategijos:
   1. Strategija: Bendro data konteinerio (vector, list ir deque tipų) skaidymas (rūšiavimas) į du naujus to paties tipo konteinerius: "vargšiukų" ir "kietiakų".
   2. Strategija: Bendro data konteinerio (vector, list ir deque) skaidymas (rūšiavimas) panaudojant tik vieną naują konteinerį: "vargšiukai". 
 * Visos 3 strategijos yra pasiekiamos po klausimo "Kuri metoda norite pasirinkti (1,2,3)?"
