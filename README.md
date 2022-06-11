@@ -30,6 +30,7 @@
 * Nuskaityti iš filų studentai yra suskirstomi ir išrašomi į du atskirus failus.
   * Studentai su <5 vidurkiu į "nuskriaustukuX.txt" fila.
   * Studentai su >=5 vidurkiu į "galvociaiX.txt" fila.
+* Padalinimo vidurkiu naudojama tik vidurkio formule, o ne mediana.
 * Yra apskaiciuojami ir parodomi filu kurimo ir duomenu apdorojimo laikai.
 
 # v0.5
