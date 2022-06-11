@@ -227,6 +227,8 @@ void mix2(string read_file, int k)
     int kodel = 0;
     list<string> splited;
     list<data> sarasas;
+    list<kietiaku> sarasas2;
+    list<vargsiuku> sarasas3;
     data laik;
     data laik_tust;
     string eil;
@@ -295,6 +297,9 @@ void mix2(string read_file, int k)
             kodel++;
         }
     }
+    cout << "Studentu dydis: " << sarasas.size() << " ";
+    cout << "Kietakiu dydis: " << sarasas2.size() << " ";
+    cout << "Vargsiuku dydis: " << sarasas3.size() << "\n";
     //----------------------------------------------------------------------
     for (auto &a: sarasas){
         outputas += a.eilute;
@@ -402,6 +407,9 @@ void mix3(string read_file, int k)
             kodel++;
         }
     }
+    cout << "Studentu dydis: " << sarasas.size() << " ";
+    cout << "Kietakiu dydis: " << sarasas2.size() << " ";
+    cout << "Vargsiuku dydis: " << sarasas3.size() << "\n";
     //----------------------------------------------------------------------
     for (auto &a: sarasas2){
         outputas += a.eilute; 
@@ -510,6 +518,9 @@ void mix4(string read_file, int k)
             kodel++;
         }
     }
+    cout << "Studentu dydis: " << sarasas.size() << " ";
+    cout << "Kietakiu dydis: " << sarasas2.size() << " ";
+    cout << "Vargsiuku dydis: " << sarasas3.size() << "\n";
     //----------------------------------------------------------------------
     for (auto &a: sarasas2){
         outputas += a.eilute; 
