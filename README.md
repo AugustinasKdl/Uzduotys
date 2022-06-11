@@ -48,3 +48,4 @@
   2. Strategija: Bendro data konteinerio (vector, list ir deque) skaidymas (rūšiavimas) panaudojant tik vieną naują konteinerį: "vargšiukai". 
 * Visos 3 strategijos yra pasiekiamos po klausimo "Kuri metoda norite pasirinkti (1,2,3)?"
   * 1 - orginalus v0.5 sprendimas, 2 - 1 strategija, 3 - 2 strategija  
+* Prideti isvedimai kiekvieno konteinerio dydzio
