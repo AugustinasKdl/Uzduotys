@@ -299,6 +299,223 @@ void mix2(string read_file, int k)
     out2_f << outputas2;
     out2_f.close();
 }
+void mix3(string read_file, int k)
+{
+    int kodel = 0;
+    vector<string> splited;
+    vector<data> sarasas;
+    vector<kietiaku> sarasas2;
+    vector<vargsiuku> sarasas3;
+    data laik;
+    kietiaku laik2;
+    vargsiuku laik3;
+    data laik_tust;
+    kietiaku laik2_tust;
+    vargsiuku laik3_tust;
+    string eil;
+    string outputas, outputas2;
+    //----------------------------------------------------------------------
+    try{
+        ifstream open_f(read_file);
+        if(open_f.peek() == EOF)
+        {
+            throw 1;
+        }
+        else
+        {
+           while (open_f){ 
+                if (!open_f.eof()) {
+                    getline(open_f, eil);
+                    splited.push_back(eil);}
+                else break;
+            }
+            open_f.close(); 
+        }
+    }
+    catch(int x){
+        cout << "Failas tuscias!! ERROR Nr. " << x;
+        terminate;
+    }
+    //-----------------------------------------------------------------------              
+    for(string &el : splited)
+    {
+        if(&el == &splited.front())
+        {
+            outputas= "Vardas                   Pavarde                  gal/vid\n";
+            outputas2= "Vardas                   Pavarde                  gal/vid\n";
+        }
+        else
+        {
+            string buf;            // buffer vektorius
+            stringstream ss(el);       // I stream idedame eilute
+            vector<string> tokens; // sukuriame elementus laikanti vektoriu
+            laik = laik_tust;  //istustiname laik vektoriu;
+            laik2 = laik2_tust;  //istustiname laik vektoriu;
+            laik3 = laik3_tust;  //istustiname laik vektoriu;
+            while (ss >> buf){
+                tokens.push_back(buf);
+            }
+            int j = 0; 
+            for(string &el2 : tokens)
+            {
+                if(isNumber(el2) == true)
+                {
+                    int i = 0;
+                    if(&el2 == &tokens.back())
+                    {
+                        istringstream(el2) >> i;
+                        laik.egz = i;
+                        laik.paz_sk = j;
+                    }
+                    else{
+                        istringstream(el2) >> i;
+                        laik.paz.push_back(i);
+                    }
+                    j++;
+                }
+            }
+            skaiciavimai2(laik);
+            spliting(laik,laik2,laik3);
+            toString3(laik2,laik3,el);
+            sarasas.push_back(laik);
+            if(laik.rezult1 < 5){
+                sarasas3.push_back(laik3);
+            }
+            else{
+                sarasas2.push_back(laik2);
+            }
+            kodel++;
+        }
+    }
+    //----------------------------------------------------------------------
+    for (auto &a: sarasas2){
+        outputas += a.eilute; 
+    }
+    for (auto &a: sarasas3){
+        outputas2 += a.eilute; 
+    }
+    //----------------------------------------------------------------------
+    string outf_name = "galvociai", outf2_name = "nuskriaustukai", temps="";
+    stringstream ss;
+    ss << k;
+    ss >> temps;
+    outf_name += temps + ".txt"; 
+    outf2_name += temps + ".txt";
+    ofstream out_f(outf_name);
+    out_f << outputas;
+    out_f.close();
+    ofstream out2_f(outf2_name);
+    out2_f << outputas2;
+    out2_f.close();
+}
+void mix4(string read_file, int k)
+{
+    int kodel = 0;
+    vector<string> splited;
+    vector<data> sarasas;
+    vector<kietiaku> sarasas2;
+    vector<vargsiuku> sarasas3;
+    data laik;
+    kietiaku laik2;
+    vargsiuku laik3;
+    data laik_tust;
+    kietiaku laik2_tust;
+    vargsiuku laik3_tust;
+    string eil;
+    string outputas, outputas2;
+    //----------------------------------------------------------------------
+    try{
+        ifstream open_f(read_file);
+        if(open_f.peek() == EOF)
+        {
+            throw 1;
+        }
+        else
+        {
+           while (open_f){ 
+                if (!open_f.eof()) {
+                    getline(open_f, eil);
+                    splited.push_back(eil);}
+                else break;
+            }
+            open_f.close(); 
+        }
+    }
+    catch(int x){
+        cout << "Failas tuscias!! ERROR Nr. " << x;
+        terminate;
+    }
+    //-----------------------------------------------------------------------              
+    for(string &el : splited)
+    {
+        if(&el == &splited.front())
+        {
+            outputas= "Vardas                   Pavarde                  gal/vid\n";
+            outputas2= "Vardas                   Pavarde                  gal/vid\n";
+        }
+        else
+        {
+            string buf;            // buffer vektorius
+            stringstream ss(el);       // I stream idedame eilute
+            vector<string> tokens; // sukuriame elementus laikanti vektoriu
+            laik = laik_tust;  //istustiname laik vektoriu;
+            laik2 = laik2_tust;  //istustiname laik vektoriu;
+            laik3 = laik3_tust;  //istustiname laik vektoriu;
+            while (ss >> buf){
+                tokens.push_back(buf);
+            }
+            int j = 0; 
+            for(string &el2 : tokens)
+            {
+                if(isNumber(el2) == true)
+                {
+                    int i = 0;
+                    if(&el2 == &tokens.back())
+                    {
+                        istringstream(el2) >> i;
+                        laik.egz = i;
+                        laik.paz_sk = j;
+                    }
+                    else{
+                        istringstream(el2) >> i;
+                        laik.paz.push_back(i);
+                    }
+                    j++;
+                }
+            }
+            skaiciavimai2(laik);
+            spliting2(laik,laik2);
+            toString4(laik2,laik,el);
+            if(laik.rezult1 < 5){
+                sarasas.push_back(laik);
+            }
+            else{
+                sarasas2.push_back(laik2);
+            }
+            kodel++;
+        }
+    }
+    //----------------------------------------------------------------------
+    for (auto &a: sarasas2){
+        outputas += a.eilute; 
+    }
+    for (auto &a: sarasas){
+        outputas2 += a.eilute; 
+    }
+    //----------------------------------------------------------------------
+    string outf_name = "galvociai", outf2_name = "studentai", temps="";
+    stringstream ss;
+    ss << k;
+    ss >> temps;
+    outf_name += temps + ".txt"; 
+    outf2_name += temps + ".txt";
+    ofstream out_f(outf_name);
+    out_f << outputas;
+    out_f.close();
+    ofstream out2_f(outf2_name);
+    out2_f << outputas2;
+    out2_f.close();
+}
 void skaiciavimai2(data& temp)
 {
     int sum = 0;
@@ -328,4 +545,75 @@ void toString2(data& temp, string& line)
     }
     temp.eilute = s3;
     temp.eilute2 = s4;
+}
+void spliting(data& temp, kietiaku& temp2, vargsiuku& temp3)
+{
+    if(temp.rezult1 < 5)
+    {
+        temp3.vardas = temp.vardas;
+        temp3.pavarde = temp.pavarde;
+        temp3.paz_sk = temp.paz_sk;
+        temp3.paz = temp.paz;
+        temp3.egz = temp.egz;
+        temp3.rezult1 = temp.rezult1;
+        temp3.rezult2 = temp.rezult2;
+        temp3.eilute = temp.eilute;
+        temp3.eilute2 = temp.eilute2;
+        temp3.paz = temp.paz;
+    }
+    else if(temp.rezult1 >= 5)
+    {
+        temp2.vardas = temp.vardas;
+        temp2.pavarde = temp.pavarde;
+        temp2.paz_sk = temp.paz_sk;
+        temp2.paz = temp.paz;
+        temp2.egz = temp.egz;
+        temp2.rezult1 = temp.rezult1;
+        temp2.rezult2 = temp.rezult2;
+        temp2.eilute = temp.eilute;
+        temp2.eilute2 = temp.eilute2;
+        temp2.paz = temp.paz;
+    }
+}
+void spliting2(data& temp, kietiaku& temp2)
+{
+    if(temp.rezult1 >= 5)
+    {
+        temp2.vardas = temp.vardas;
+        temp2.pavarde = temp.pavarde;
+        temp2.paz_sk = temp.paz_sk;
+        temp2.paz = temp.paz;
+        temp2.egz = temp.egz;
+        temp2.rezult1 = temp.rezult1;
+        temp2.rezult2 = temp.rezult2;
+        temp2.eilute = temp.eilute;
+        temp2.eilute2 = temp.eilute2;
+        temp2.paz = temp.paz;
+    }
+}
+void toString3(kietiaku& temp2, vargsiuku& temp3, string& line)
+{
+    string s1, s2, s3, s4;
+    stringstream ss, ss2;
+    ss << temp2.rezult1;
+    ss >> s1;
+    s3 = line.substr(0, 53) + s1 + "\n";
+    ss2 << temp3.rezult1;
+    ss2 >> s2;
+    s4 = line.substr(0, 53) + s2 + "\n";   
+    temp2.eilute = s3;
+    temp3.eilute = s4;
+}
+void toString4(kietiaku& temp2, data& temp3, string& line)
+{
+    string s1, s2, s3, s4;
+    stringstream ss, ss2;
+    ss << temp2.rezult1;
+    ss >> s1;
+    s3 = line.substr(0, 53) + s1 + "\n";
+    ss2 << temp3.rezult1;
+    ss2 >> s2;
+    s4 = line.substr(0, 53) + s2 + "\n";   
+    temp2.eilute = s3;
+    temp3.eilute = s4;
 }

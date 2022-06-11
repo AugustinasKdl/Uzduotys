@@ -18,26 +18,82 @@ int main()
                 cout << "Ar jau turite studentu faila (t/n)?"; cin >> tkr5;
                 if(tkr5 == "t" || tkr5 == "T")
                 {
-                    auto t1 = Clock::now();
-                    int stud = 1000;
-                    mix2("Generuoti_stud1000.txt",stud);
-                    cout <<"Pirmas baigtas!" << endl;
-                    stud = 10000;
-                    mix2("Generuoti_stud10000.txt",stud);
-                    cout <<"Antras baigtas!" << endl;
-                    stud = 100000;
-                    mix2("Generuoti_stud100000.txt",stud);
-                    cout <<"Trecias baigtas!" << endl;
-                    stud = 1000000;
-                    mix2("Generuoti_stud1000000.txt",stud);
-                    cout <<"Ketvirtas baigtas!" << endl;
-                    stud = 10000000;
-                    mix2("Generuoti_stud10000000.txt",stud);
-                    cout <<"Penktas baigtas!" << endl;
-                    auto t2 = Clock::now();
-                    duration<double> diff = t2-t1;
-                    cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv \n";
-                    cout << "Uztruko visa programa: " << diff.count() << " s. ! \n";
+                    cout << "Kuri metoda norite pasirinkti (1,2,3)?"; cin >> tkr6;
+                    while(run6){
+                        if(tkr6 == "1"){
+                            auto t1 = Clock::now();
+                            int stud = 1000;
+                            mix2("Generuoti_stud1000.txt",stud);
+                            cout <<"Pirmas baigtas!" << endl;
+                            stud = 10000;
+                            mix2("Generuoti_stud10000.txt",stud);
+                            cout <<"Antras baigtas!" << endl;
+                            stud = 100000;
+                            mix2("Generuoti_stud100000.txt",stud);
+                            cout <<"Trecias baigtas!" << endl;
+                            stud = 1000000;
+                            mix2("Generuoti_stud1000000.txt",stud);
+                            cout <<"Ketvirtas baigtas!" << endl;
+                            stud = 10000000;
+                            mix2("Generuoti_stud10000000.txt",stud);
+                            cout <<"Penktas baigtas!" << endl;
+                            auto t2 = Clock::now();
+                            duration<double> diff = t2-t1;
+                            cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv \n";
+                            cout << "Uztruko visa programa: " << diff.count() << " s. ! \n";
+                            run6 = false;
+                        }
+                        else if(tkr6 == "2"){
+                            auto t1 = Clock::now();
+                            int stud = 1000;
+                            mix3("Generuoti_stud1000.txt",stud);
+                            cout <<"Pirmas baigtas!" << endl;
+                            stud = 10000;
+                            mix3("Generuoti_stud10000.txt",stud);
+                            cout <<"Antras baigtas!" << endl;
+                            stud = 100000;
+                            mix3("Generuoti_stud100000.txt",stud);
+                            cout <<"Trecias baigtas!" << endl;
+                            stud = 1000000;
+                            mix3("Generuoti_stud1000000.txt",stud);
+                            cout <<"Ketvirtas baigtas!" << endl;
+                            stud = 10000000;
+                            mix3("Generuoti_stud10000000.txt",stud);
+                            cout <<"Penktas baigtas!" << endl;
+                            auto t2 = Clock::now();
+                            duration<double> diff = t2-t1;
+                            cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv \n";
+                            cout << "Uztruko visa programa: " << diff.count() << " s. ! \n";
+                            run6 = false;
+                        }
+                        else if(tkr6 == "3"){
+                            auto t1 = Clock::now();
+                            int stud = 1000;
+                            mix4("Generuoti_stud1000.txt",stud);
+                            cout <<"Pirmas baigtas!" << endl;
+                            stud = 10000;
+                            mix4("Generuoti_stud10000.txt",stud);
+                            cout <<"Antras baigtas!" << endl;
+                            stud = 100000;
+                            mix4("Generuoti_stud100000.txt",stud);
+                            cout <<"Trecias baigtas!" << endl;
+                            stud = 1000000;
+                            mix4("Generuoti_stud1000000.txt",stud);
+                            cout <<"Ketvirtas baigtas!" << endl;
+                            stud = 10000000;
+                            mix4("Generuoti_stud10000000.txt",stud);
+                            cout <<"Penktas baigtas!" << endl;
+                            auto t2 = Clock::now();
+                            duration<double> diff = t2-t1;
+                            cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv \n";
+                            cout << "Uztruko visa programa: " << diff.count() << " s. ! \n";
+                            run6 = false;
+                        }
+                        else
+                        {
+                            cout << "Error! Ivedimas netinkamas. Prašome pakartoti." << endl;
+                        }
+                    }
                     run5 = false;
                 }
                 else if(tkr5 == "n" || tkr5 == "N")
